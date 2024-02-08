@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            zip_job_image:latest'
+            image 'zip_job_image:latest'
             args '-u root:root --privileged'
             label 'zip-job-docker'
             reuseNode true
