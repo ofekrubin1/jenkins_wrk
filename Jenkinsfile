@@ -1,10 +1,10 @@
 pipeline {
     agent {
-        dockerfile {
-            filename 'Dockerfile'
+        docker {
+            zip_job_image:latest'
+            args '-u root:root --privileged'
             label 'zip-job-docker'
             reuseNode true
-            args '-u root:root --privileged'
         }
     }
     stages {
