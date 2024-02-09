@@ -5,6 +5,7 @@ pipeline {
             label 'zip-job-docker'
             reuseNode true
             args '-u root:root --privileged'
+            network 'my-network'
         }
     }
     stages {
