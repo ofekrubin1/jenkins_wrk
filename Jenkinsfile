@@ -4,7 +4,7 @@ pipeline {
             image 'zip_job_image:latest'
             label 'zip-job-docker'
             reuseNode true
-            args '-u root:root --privileged --net="my-network"'
+            args '-u root:root --privileged --net="my-network" -v /tmp/jfrog:/tmp/jfrog'
         }
     }
     stages {
