@@ -14,7 +14,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'ls $JENKINS_HOME/tools/jfrog-cli-latest/'
                 sh 'python3 /tmp/zip_job.py'
                 jf 'rt u a_1.2.0.zip generic-local/'
                 //sh 'curl -u admin:password -T a_1.2.0.zip "http://172.19.0.3/artifactory/generic-local/a_1.2.0.zip"'
