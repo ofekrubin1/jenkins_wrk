@@ -10,7 +10,7 @@ pipeline {
         }
     }
     tools {
-        jfrog 'jfrog-cli'
+        jfrog 'jfrog-cli-latest'
     }
     stages {
         stage('Build') {
