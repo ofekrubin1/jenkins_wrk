@@ -12,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'python3 /tmp/zip_job.py'
-                sh 'curl -u admin:password -T a_1.2.0.zip "http://172.18.0.2/artifactory/generic-local/a_1.2.0.zip"'
+                sh 'curl -u admin:password -T a_1.2.0.zip "http://172.19.0.3/artifactory/generic-local/a_1.2.0.zip"'
             }
         }
     }
