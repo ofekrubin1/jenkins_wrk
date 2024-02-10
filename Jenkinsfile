@@ -15,7 +15,7 @@ pipeline {
                 // sh '/tmp/jfrog/jf c show'
                 // sh '/tmp/jfrog/jf rt ping --url=http://172.19.0.3:8082'
                 // sh '/tmp/jfrog/jf rt u a_1.2.0.zip generic-local/'
-                sh '/tmp/jfrog/jf rt u a_1.2.0.zip generic-local/ --url=http://172.19.0.3:8082 --user=admin:Dd123123123!'
+                sh '/tmp/jfrog/jf rt u a_1.2.0.zip generic-local/ --url=http://192.168.68.119:8082/artifactory --user=admin:Dd123123123!'
                 // sh '/tmp/jfrog/jf rt bp'
                 //jf 'rt dl my-repo/test-file'
             }
