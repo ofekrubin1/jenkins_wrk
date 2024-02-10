@@ -17,4 +17,7 @@ pipeline {
                 sh 'python3 /tmp/zip_job.py'
                 sh "/tmp/jfrog/jf rt u a_1.2.0.zip generic-local/ --url=http://172.19.0.3:8082/artifactory --apikey=${apiKey}"
                             
+          }
+        }
+    }
 }
