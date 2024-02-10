@@ -27,14 +27,14 @@ pipeline {
     
     post {
         success {
-            mail to: 'poodelnoodel1@gmail.com',
-                 subject: "Job ${currentBuild.fullDisplayName} succeeded",
-                 body: "The job ${currentBuild.fullDisplayName} has succeeded."
+            emailext subject: "Job ${currentBuild.fullDisplayName} succeeded",
+                     body: "The job ${currentBuild.fullDisplayName} has succeeded.",
+                     to: 'poodelnoodel1@gmail.com'
         }
         failure {
-            mail to: 'poodelnoodel1@gmail.com',
-                 subject: "Job ${currentBuild.fullDisplayName} failed",
-                 body: "The job ${currentBuild.fullDisplayName} has failed."
+            emailext subject: "Job ${currentBuild.fullDisplayName} failed",
+                     body: "The job ${currentBuild.fullDisplayName} has failed.",
+                     to: 'poodelnoodel1@gmail.com'
         }
     }
 }
