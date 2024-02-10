@@ -12,6 +12,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'apt install iputils-ping -y'
                 sh 'python3 /tmp/zip_job.py'
                 sh 'ping 172.19.0.3'
                 sh 'curl -u admin:password -T a_1.2.0.zip "http://172.19.0.3/artifactory/generic-local/a_1.2.0.zip"'
