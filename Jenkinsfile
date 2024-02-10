@@ -6,7 +6,7 @@ pipeline {
             reuseNode true
             args '-u root:root --privileged'
             args  '--net="my-network"'
-            volumes '/tmp/jfrog/:/tmp/jfrog/'
+            volumes ['/tmp/jfrog/:/tmp/jfrog/']
         }
     }
     //tools {
