@@ -5,7 +5,6 @@ pipeline {
             label 'zip-job-docker'
             reuseNode true
             args '-u root:root --privileged --net="my-network"'
-            volumes ['/tmp/jfrog/:/tmp/jfrog/']
         }
     }
     stages {
