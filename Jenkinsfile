@@ -15,7 +15,7 @@ pipeline {
         stage ('Testing') {
             steps {
                 sh 'python3 /tmp/zip_job.py'
-                sh "/tmp/jfrog/jf rt u a_1.2.0.zip generic-local/ --url=${env.ARTIFACTORY_URL} --access-token=${env.API_KEY}"
+                sh "/tmp/jfrog/jf rt u a_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
             }
         }
     }
