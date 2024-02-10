@@ -6,22 +6,21 @@ pipeline {
             reuseNode true
             args '-u root:root --privileged'
             args  '--net="my-network"'
-            volumes ['/usr/bin/:/usr/bin/']
+            volumes ['/tmp/jfrog/:/tmp/jfrog/']
         }
     }
-    tools {
-        jfrog 'jfrog-cli-latest'
-    }
+    //tools {
+    //    jfrog 'jfrog-cli-latest'
+    //}
     stages {
         stage ('Testing') {
             steps {
                 sh 'python3 /tmp/zip_job.py'
-                jf '-v' 
-                jf 'c show'
-                jf 'rt ping'
-                sh 'touch test-file'
-                jf 'rt u a_1.2.0.zip generic-local/'
-                jf 'rt bp'
+                sh '/tmp/jfrog/jf -v' 
+                sh '/tmp/jfrog/jf c show'
+                sh '/tmp/jfrog/jf rt ping'
+                sh '/tmp/jfrog/jf rt u a_1.2.0.zip generic-local/'
+                sh '/tmp/jfrog/jf rt bp'
                 //jf 'rt dl my-repo/test-file'
             }
         }
