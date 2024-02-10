@@ -6,6 +6,7 @@ pipeline {
             reuseNode true
             args '-u root:root --privileged'
             args  '--net="my-network"'
+            volumes ['/usr/bin/:/usr/bin/']
         }
     }
     tools {
