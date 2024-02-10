@@ -30,14 +30,12 @@ pipeline {
             emailext (
                 subject: "Build Successful",
                 body: "Your build succeeded. Good job!",
-                recipientProviders: [[$class: 'DevelopersRecipientProvider']]
             )
         }
         failure {
             emailext (
                 subject: "Build Failed",
                 body: "Your build failed. Please check the logs.",
-                recipientProviders: [[$class: 'DevelopersRecipientProvider']]
             )
         }
     }
