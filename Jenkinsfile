@@ -23,7 +23,7 @@ pipeline {
                 jf 'rt bp'
                 //jf 'rt dl my-repo/test-file'
             }
-        
+        }
         stage('Build') {
             steps {
                 
