@@ -4,14 +4,10 @@ pipeline {
             image 'zip_job_image:latest'
             label 'zip-job-docker'
             reuseNode true
-            args '-u root:root --privileged'
-            args  '--net="my-network"'
+            args '-u root:root --privileged --net="my-network"'
             volumes ['/tmp/jfrog/:/tmp/jfrog/']
         }
     }
-    //tools {
-    //    jfrog 'jfrog-cli-latest'
-    //}
     stages {
         stage ('Testing') {
             steps {
@@ -26,4 +22,3 @@ pipeline {
         }
     }
 }
-
