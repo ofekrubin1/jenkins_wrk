@@ -7,7 +7,7 @@ pipeline {
             args '-u root:root --privileged --net="my-network" -v /tmp/jfrog:/tmp/jfrog'
         }
     }
-    envinronment{
+    environment{
         CI=true
         ACCESS_TOKEN=cradentials('artifactory_secret_token')
     }
