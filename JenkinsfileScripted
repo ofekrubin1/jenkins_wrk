@@ -22,7 +22,6 @@ pipeline {
                     sh "/tmp/jfrog/jf rt u $artifact generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
                     
                 }
-                    deleteDir() 
             }
         }
     }
