@@ -14,17 +14,23 @@ pipeline {
     }
     
     stages {
-        stage ('Action') {
-            steps {
-                sh 'python3 /tmp/zip_job.py'
-                sh "/tmp/jfrog/jf rt u a_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
-                sh "/tmp/jfrog/jf rt u b_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
-                sh "/tmp/jfrog/jf rt u c_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
-                sh "/tmp/jfrog/jf rt u d_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
-            }
+    stage ('Action') {
+        steps {
+            sh 'python3 /tmp/zip_job.py'
+            sh "/tmp/jfrog/jf rt u a_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
+            sh "/tmp/jfrog/jf rt u b_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
+            sh "/tmp/jfrog/jf rt u c_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
+            sh "/tmp/jfrog/jf rt u d_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
         }
     }
     
+    stage ('Cleanup') {
+        steps {
+            deleteDir()
+        }
+    }
+}
+
     post {
         success {
             emailext (
@@ -42,10 +48,5 @@ pipeline {
                 recipientProviders: [requestor(), developers(), culprits()]
             )
         }
-        always {
-            cleanup {
-                deleteDir()
-            }
-        }  
     }
 }
