@@ -38,7 +38,7 @@ pipeline {
             emailext (
                 subject: "Build Failed",
                 body: "Your build failed. Please check the logs.",
-                to: "poodelnoodel1@gmail.com"
+                to: "poodelnoodel1@gmail.com",
                 recipientProviders: [requestor(), developers(), culprits()]
             )
         }
