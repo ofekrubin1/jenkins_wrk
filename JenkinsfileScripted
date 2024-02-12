@@ -17,6 +17,7 @@ pipeline {
     stage ('Action') {
         steps {
             script {
+                sh "ls"
                 def artifactUrls = ['a_1.2.0.zip', 'b_1.2.0.zip', 'c_1.2.0.zip', 'd_1.2.0.zip']
                 artifactUrls.each { artifact ->
                     sh "/tmp/jfrog/jf rt u $artifact generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
