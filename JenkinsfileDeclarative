@@ -42,13 +42,10 @@ pipeline {
                 recipientProviders: [requestor(), developers(), culprits()]
             )
         }
-    }
-    
-    post {
         always {
             cleanup {
                 deleteDir()
             }
-        }
+        }  
     }
 }
