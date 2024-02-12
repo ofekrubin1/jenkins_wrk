@@ -1,6 +1,6 @@
 pipeline {
-    agent {
-        docker {
+    agent {  
+        docker { 
             image 'zip_job_image:latest'
             label 'zip-job-docker'
             reuseNode true
@@ -14,41 +14,41 @@ pipeline {
     }
     
     stages {
-    stage ('Action') {
-        steps {
-            script {
-                sh "cd /tmp"
-                sh "ls"
-                def artifactUrls = ['a_1.2.0.zip', 'b_1.2.0.zip', 'c_1.2.0.zip', 'd_1.2.0.zip']
-                artifactUrls.each { artifact ->
-                    sh "/tmp/jfrog/jf rt u $artifact generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
-                    
+        stage ('Action') {
+            steps {
+                script {
+                    def files = ['a', 'b', 'c', 'd']
+                    files.each { file ->
+                        sh "python3 /tmp/zip_job.py"
+                        sh "/tmp/jfrog/jf rt u ${file}_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
+                    }
                 }
             }
         }
+    
+        stage ('Cleanup') {
+            steps {
+                deleteDir()
+            }
+        }
     }
-}
 
-post {
-    success {
-        script {
+    post {
+        success {
             emailext (
                 subject: "Build Successful",
                 body: "Your build succeeded. Good job!",
-                to: "poodelnoodel1@gmail.com", // Add your desired recipient here
+                to: "poodelnoodel1@gmail.com",
                 recipientProviders: [requestor(), developers(), culprits()]
             )
         }
-    }
-    failure {
-        script {
+        failure {
             emailext (
                 subject: "Build Failed",
                 body: "Your build failed. Please check the logs.",
-                to: "poodelnoodel1@gmail.com", // Add your desired recipient here
+                to: "poodelnoodel1@gmail.com",
                 recipientProviders: [requestor(), developers(), culprits()]
             )
         }
     }
-}
 }
