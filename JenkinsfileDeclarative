@@ -36,7 +36,7 @@ pipeline {
             emailext (
                 subject: "Build Successful",
                 body: "Your build succeeded. Good job!",
-                to: "poodelnoodel1@gmail.com", // Add your desired recipient here
+                to: "poodelnoodel1@gmail.com",
                 recipientProviders: [requestor(), developers(), culprits()]
             )
         }
@@ -44,7 +44,7 @@ pipeline {
             emailext (
                 subject: "Build Failed",
                 body: "Your build failed. Please check the logs.",
-                to: "poodelnoodel1@gmail.com", // Add your desired recipient here
+                to: "poodelnoodel1@gmail.com",
                 recipientProviders: [requestor(), developers(), culprits()]
             )
         }
