@@ -1,0 +1,26 @@
+version: "3.3"
+services:
+  artifactory-service:
+    image: docker.bintray.io/jfrog/artifactory-oss:7.49.6
+    container_name: artifactory-tlv
+    restart: always
+    ports:
+      - "8081:8081"
+      - "8082:8082"
+    environment:
+      - ARTIFACTORY_URL=http://artifactory-tlv
+      - ARTIFACTORY_USER=super-user
+      - ARTIFACTORY_PASSWORD=Qw12856!
+      - ARTIFACTORY_USERS_CREATION_MODE=auto
+      - ARTIFACTORY_DEFAULT_ADMIN=super-user
+      - ARTIFACTORY_DEFAULT_ADMIN_PASSWORD=Qw12856!
+      - ARTIFACTORY_REPOSITORY=binary-storage/${VERSION}
+    volumes:
+      - /tmp/artifactory:/tmp/jfrog/artifactory
+    networks:
+      - my-network
+
+networks:    # Define the networks section
+  my-network:
+    external: true
+
