@@ -16,7 +16,7 @@ pipeline {
                 //sh 'wget -qO - https://releases.jfrog.io/artifactory/jfrog-debs | apt-key add - && echo "deb https://releases.jfrog.io/artifactory/jfrog-debs xenial contrib" | tee -a /etc/apt/sources.list'
                 //sh 'apt update'
                 //sh 'apt install -y jfrog-cli-v2'
-                //sh 'mkdir -p /tmp/jfrog'
+                sh 'mkdir -p /tmp/jfrog'
                 //sh 'cp /var/lib/jenkins/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/jf /tmp/jfrog/'
             }
         }
