@@ -27,7 +27,7 @@ pipeline {
                     image 'zip_job_image:latest'
                     label 'zip-job-docker'
                     reuseNode true
-                    args '-u root:root --privileged --net="my-network" -v /var/lib/jenkins/:/tmp/jfrog/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/'
+                    args '-u root:root --privileged --net="my-network" -v /var/lib/jenkins/:/tmp/jfrog/'
                 }
             }
             steps {
