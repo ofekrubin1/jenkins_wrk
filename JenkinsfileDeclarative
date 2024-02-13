@@ -51,7 +51,7 @@ pipeline {
             emailext (
                 subject: "Build Failed",
                 body: "Your build based on Declarative file failed. Please check the logs.",
-                to: "poodelnoodel1@gmail.com",
+                to: "moshekohen05@gmail.com",
                 recipientProviders: [requestor(), developers(), culprits()]
             )
         }
