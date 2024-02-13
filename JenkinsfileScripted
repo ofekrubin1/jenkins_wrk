@@ -41,7 +41,7 @@ pipeline {
         success {
             emailext (
                 subject: "Build Successful",
-                body: "Your build succeeded. Good job!",
+                body: "Your build based on Scripted file succeeded. Good job!",
                 to: "poodelnoodel1@gmail.com",
                 recipientProviders: [requestor(), developers(), culprits()]
             )
@@ -49,7 +49,7 @@ pipeline {
         failure {
             emailext (
                 subject: "Build Failed",
-                body: "Your build failed. Please check the logs.",
+                body: "Your build based on Scripted file failed. Please check the logs.",
                 to: "poodelnoodel1@gmail.com",
                 recipientProviders: [requestor(), developers(), culprits()]
             )
