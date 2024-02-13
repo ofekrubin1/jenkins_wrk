@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'zip-job-docker' // Agent running on the Jenkins VM
+        label 'zip-job-docker'
     }
 
     environment {
@@ -11,11 +11,11 @@ pipeline {
     stages {
         stage ('Install JFrog CLI') {
             steps {
-                sh 'wget -O jfrog.tar.gz https://releases.jfrog.io/artifactory/jfrog-cli/v1/1.48.1/jfrog-cli-linux-amd64/jfrog.tar.gz'
-                sh 'tar -xzf jfrog.tar.gz'
-                sh 'mv jfrog /bin/'
+                sh 'wget -qO - https://releases.jfrog.io/artifactory/jfrog-debs | sudo apt-key add - && echo "deb https://releases.jfrog.io/artifactory/jfrog-debs xenial contrib" | sudo tee -a /etc/apt/sources.list'
+                sh 'sudo apt update'
+                sh 'sudo apt install -y jfrog-cli-v2'
                 sh 'mkdir -p /tmp/jfrog'
-                sh 'cp /bin/jfrog /tmp/jfrog/'
+                sh 'cp /bin/jf /tmp/jfrog/'
             }
         }
 
