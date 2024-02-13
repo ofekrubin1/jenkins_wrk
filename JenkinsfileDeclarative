@@ -17,6 +17,7 @@ pipeline {
                 //sh 'apt update'
                 //sh 'apt install -y jfrog-cli-v2'
                 sh 'mkdir -p /tmp/jfrog'
+                sh 'jf -v'
                 //sh 'cp /var/lib/jenkins/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/jf /tmp/jfrog/'
             }
         }
@@ -32,10 +33,10 @@ pipeline {
             }
             steps {
                 sh 'python3 /tmp/zip_job.py'
-                sh '/tmp/jfrog/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/jf rt u a_1.2.0.zip generic-local/'
-                sh '/tmp/jfrog/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/jf rt u b_1.2.0.zip generic-local/'
-                sh '/tmp/jfrog/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/jf rt u c_1.2.0.zip generic-local/'
-                sh '/tmp/jfrog/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/jf rt u d_1.2.0.zip generic-local/'
+                sh "/tmp/jfrog/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/jf rt u a_1.2.0.zip generic-local/"
+                sh "/tmp/jfrog/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/jf rt u b_1.2.0.zip generic-local/"
+                sh "/tmp/jfrog/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/jf rt u c_1.2.0.zip generic-local/"
+                sh "/tmp/jfrog/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/jf rt u d_1.2.0.zip generic-local/"
 
                 //sh "/tmp/jfrog/jf rt u d_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL}"
                     }
