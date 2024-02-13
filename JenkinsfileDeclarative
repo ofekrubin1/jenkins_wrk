@@ -17,7 +17,7 @@ pipeline {
                 //sh 'apt update'
                 //sh 'apt install -y jfrog-cli-v2'
                 sh 'mkdir -p /tmp/jfrog'
-                sh 'cp /bin/jf /tmp/jfrog/'
+                sh 'cp /var/lib/jenkins/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/jf /tmp/jfrog/'
             }
         }
 
