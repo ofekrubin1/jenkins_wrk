@@ -6,10 +6,10 @@ node('zip-job-docker') {
     def jfrogHome = tool 'jfrog-cli-latest'
 
     // Add the tool's bin directory to the PATH (optional)
-    env.PATH = "${jfrogHome}/bin:${env.PATH}"
+    //env.PATH = "${jfrogHome}/bin:/var/lib/jenkins/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/"
 
     // Now you can use the installed tool
-    sh 'jfrog --version'
+    //sh 'jfrog --version'
 
 
     // Define stages
