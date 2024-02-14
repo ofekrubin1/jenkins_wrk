@@ -7,11 +7,8 @@ node('zip-job-docker') {
     tool:
       jfrog:
         installations:
-            - name: "jfrog-cli-latest"
-              properties:
-              - installSource:
-                installers:
-                - "releasesInstaller"
+          - name: "jfrog-cli-latest"
+            home: "/var/lib/jenkins/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/"
 
 
     // Define stages
