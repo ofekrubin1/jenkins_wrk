@@ -12,32 +12,32 @@ node('zip-job-docker') {
     //sh 'jfrog --version'
 
 
-    // Define stages
-    stage('Action') {
-        agent {
-            docker { 
-                image 'zip_job_image:latest'
-                label 'zip-job-docker'
-                reuseNode true
-                args '-u root:root --privileged --net="my-network" -v /var/lib/jenkins/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/:/tmp/jfrog/'
+    stages {
+        stage('Action') {
+            agent {
+                docker { 
+                    image 'zip_job_image:latest'
+                    label 'zip-job-docker'
+                    reuseNode true
+                    args '-u root:root --privileged --net="my-network" -v /var/lib/jenkins/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/:/tmp/jfrog/'
+                }
+            }
+            steps {
+                    sh 'python3 /tmp/zip_job.py'
+                    sh "/tmp/jfrog/jf rt u a_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
+                    sh "/tmp/jfrog/jf rt u b_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
+                    sh "/tmp/jfrog/jf rt u c_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
+                    sh "/tmp/jfrog/jf rt u d_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
+                }
+        }
+    
+        stage('Cleanup') {
+            steps {
+                deleteDir()
             }
         }
-        steps {
-                script {
-                    def files = ['a', 'b', 'c', 'd']
-                    files.each { file ->
-                        sh "python3 /tmp/zip_job.py"
-                        sh "/tmp/jfrog/jf rt u ${file}_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
-                    }
-            }
-    }
-
-    stage('Cleanup') {
-        steps {
-            deleteDir()
-        }
-    }
 }
+
 
     // Define post-build actions
     post {
