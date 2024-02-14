@@ -3,12 +3,13 @@ node('zip-job-docker') {
     def ARTIFACTORY_URL = 'http://artifactory-tlv:8082/artifactory'
     def API_KEY = 'eyJ2ZXIiOiIyIiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYiLCJraWQiOiJ0Tkhwc1oyc3pIUmxyN0RMTVJSSGpxNFpvdDJXWEFpS3FBYVhLTlRzTzNBIn0.eyJleHQiOiJ7XCJyZXZvY2FibGVcIjpcInRydWVcIn0iLCJzdWIiOiJqZmFjQDAxaHA5OXJxZTAwbnM5MG02MHcxbXIwYWo0XC91c2Vyc1wvYWRtaW4iLCJzY3AiOiJhcHBsaWVkLXBlcm1pc3Npb25zXC9hZG1pbiIsImF1ZCI6IipAKiIsImlzcyI6ImpmZmVAMDAwIiwiaWF0IjoxNzA3NTc4Nzk5LCJqdGkiOiI3ZDgzMmIzNC04YTg1LTQxMzAtOGI1Zi0wNzE3YmViNzJhYzIifQ.bzVhbWhXoButZtm-o4tm67-KKJx5tmabLFk05nqX_axkg9vTspGL5DvdY0F70glc04HzzlGbZUFIyz18hvZi-NXlaskBYmQMyoAeGFjYQa5HRJa7hXa2VD6iiuve7peSqB-t3INYqwnfpHjgSCJtylunGpNHTR-p4g0s4EBtXKSVNLOra3qwfGFIHYV01J4PLY2qv7cBurcYHYZ1SaWss780cMcMlyXPK2JTvq6Ze6cz1_hDLfQTK_-F9r-EnQdsIm1j2cUzvhu1pJpZhR_3FtvR285QkfL8EMO_-66d6P8RvOoPd-kPbN9WtRpleuz1BSr0Zc22xDHALIFvLF4WEA'
 
-    // Define JFrog tool installation
-    tool:
-      jfrog:
-        installations:
-          - name: "jfrog-cli-latest"
-            home: "/var/lib/jenkins/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/"
+    def jfrogHome = tool 'jfrog'
+
+    // Add the tool's bin directory to the PATH (optional)
+    env.PATH = "${jfrogHome}/bin:${env.PATH}"
+
+    // Now you can use the installed tool
+    sh 'jfrog --version'
 
 
     // Define stages
