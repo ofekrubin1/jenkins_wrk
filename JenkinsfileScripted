@@ -7,7 +7,7 @@ node('zip-job-docker') {
     tool:
       jfrog:
         installations:
-        - name: "jfrog-cli-latest"
+        - name: "jfrog-cli"
           properties:
             - installSource:
                   installers:
