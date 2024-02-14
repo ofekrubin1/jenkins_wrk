@@ -12,7 +12,6 @@ node('zip-job-docker') {
     //sh 'jfrog --version'
 
 
-    stages {
         stage('Action') {
             agent {
                 docker { 
@@ -22,7 +21,7 @@ node('zip-job-docker') {
                     args '-u root:root --privileged --net="my-network" -v /var/lib/jenkins/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/:/tmp/jfrog/'
                 }
             }
-            steps {
+            step {
                     sh 'python3 /tmp/zip_job.py'
                     sh "/tmp/jfrog/jf rt u a_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
                     sh "/tmp/jfrog/jf rt u b_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
@@ -36,7 +35,7 @@ node('zip-job-docker') {
                 deleteDir()
             }
         }
-}
+
 
 
     // Define post-build actions
