@@ -29,7 +29,7 @@ node('zip-job-docker') {
                         sh "python3 /tmp/zip_job.py"
                         sh "/tmp/jfrog/jf rt u ${file}_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
                     }
-        }
+            }
     }
 
     stage('Cleanup') {
@@ -37,6 +37,7 @@ node('zip-job-docker') {
             deleteDir()
         }
     }
+}
 
     // Define post-build actions
     post {
@@ -57,5 +58,5 @@ node('zip-job-docker') {
             )
         }
     }
-}
+
 }
