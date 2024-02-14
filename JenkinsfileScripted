@@ -5,12 +5,9 @@ node('zip-job-docker') {
 
     def jfrogHome = tool 'jfrog-cli-latest'
 
-    // Add the tool's bin directory to the PATH (optional)
     //env.PATH = "${jfrogHome}/bin:/var/lib/jenkins/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/"
 
-    // Now you can use the installed tool
     //sh 'jfrog --version'
-
 
         stage('Action') {
             agent {
@@ -21,7 +18,15 @@ node('zip-job-docker') {
                     args '-u root:root --privileged --net="my-network" -v /var/lib/jenkins/tools/io.jenkins.plugins.jfrog.JfrogInstallation/jfrog-cli-latest/:/tmp/jfrog/'
                 }
             }
-            
+        steps {
+                script {
+                    def files = ['a', 'b', 'c', 'd']
+                    files.each { file ->
+                        sh "python3 /tmp/zip_job.py"
+                        sh "/tmp/jfrog/jf rt u ${file}_1.2.0.zip generic-local/ --url ${env.ARTIFACTORY_URL} --access-token ${env.API_KEY}"
+                    }
+                }
+           } 
         }
     
         stage('Cleanup') {
@@ -30,9 +35,6 @@ node('zip-job-docker') {
             }
         }
 
-
-
-    // Define post-build actions
     post {
         success {
             emailext (
